@@ -13,5 +13,7 @@
     <%= b.submit "Book Flight" %>
   <% end %>
 <% else %>
-  <h3>Unfortunately, there are no flight on this day, please try another day! </h3>
+  <% if @flight_search_results && @flight_search_results.size == 0 %>
+    <h3>Unfortunately, there are no flight on this day, please try another day! </h3>
+  <% end %>
 <% end %>

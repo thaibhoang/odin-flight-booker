@@ -1,11 +1,20 @@
 <%= form_with model: @flight, url: flights_path, method: :get do |f| %>
-  <%= f.label :departure_airport_id %>
-  <%= f.select :departure_airport_id, @airport_options %>
-  <%= f.label :arrival_airport_id %>
-  <%= f.select :arrival_airport_id, @airport_options %>
-  <%= label_tag :number_of_seats, "Number of seats" %>
-  <%= number_field_tag :number_of_seats, @number_of_seats, min: 1, max: 4  %>
-  <%= label_tag :flight_date %>
-  <%= select_tag :flight_date, options_for_select(@date_options, @flight_date) %>
+  <h3>Search your flight now</h3>
+  <div>
+    <%= f.label :departure_airport_id %>
+    <%= f.select :departure_airport_id, @airport_options %>
+  </div>
+  <div>
+    <%= f.label :arrival_airport_id %>
+    <%= f.select :arrival_airport_id, @airport_options %>
+  </div>
+  <div>
+    <%= label_tag :number_of_seats, "Number of seats" %>
+    <%= number_field_tag :number_of_seats, @number_of_seats, min: 1, max: 4  %>
+  </div>
+  <div>
+    <%= label_tag :flight_date %>
+    <%= select_tag :flight_date, options_for_select(@date_options, @flight_date) %>
+  </div>
   <%= f.submit "Search Flights" %>
 <% end %>
