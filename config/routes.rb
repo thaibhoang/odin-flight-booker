@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "flights#index"
   resources :flights
+  resources :bookings
 end

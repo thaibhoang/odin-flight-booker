@@ -10,6 +10,7 @@ class FlightsController < ApplicationController
       @flight = Flight.new(flight_query_params)
       @number_of_seats = params[:number_of_seats]
       @flight_date = params[:flight_date]
+      @booking = Booking.new
     end
   end
 

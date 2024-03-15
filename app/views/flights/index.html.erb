@@ -1,8 +1,17 @@
 <%= render "search_form" %>
 
-<% if @flight_search_results %>
-  <% @flight_search_results.each do |flight| %>
-    <div>From: <%= flight.departure_airport.code %> To: <%= flight.arrival_airport.code %> Departs at: <%= flight.start_at.strftime("%H:%M %d/%m/%Y") %></div>    
-
+<% if @flight_search_results && @flight_search_results.size > 0 %>
+  <h3>Search Result </h3>
+  <%= form_with mode: @booking, url: new_booking_path, method: :get do |b| %>
+    <%= hidden_field_tag "number_of_passengers", @number_of_seats %>
+    <% @flight_search_results.each do |flight| %>
+      <div>
+        <%= b.radio_button(:flight_id, flight.id) %>
+        <%= b.label(:flight_id, flight.flight_detail) %>
+      </div>
+    <% end %>    
+    <%= b.submit "Book Flight" %>
   <% end %>
+<% else %>
+  <h3>Unfortunately, there are no flight on this day, please try another day! </h3>
 <% end %>
