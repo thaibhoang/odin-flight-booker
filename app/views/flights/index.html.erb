@@ -1,1 +1,8 @@
 <%= render "search_form" %>
+
+<% if @flight_search_results %>
+  <% @flight_search_results.each do |flight| %>
+    <div>From: <%= flight.departure_airport.code %> To: <%= flight.arrival_airport.code %> Departs at: <%= flight.start_at.strftime("%H:%M %d/%m/%Y") %></div>    
+
+  <% end %>
+<% end %>
