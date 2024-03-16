@@ -1,5 +1,17 @@
 <% if @flight %>
-<h3>Flight detail<h3>
+  <h3>Flight detail<h3>
   <div><%= @flight.flight_detail %></div>
-  
+  <%= form_with model: @booking, format: :html do |f| %>
+    <div>Passengers Details:</div>
+    <%= f.hidden_field :flight_id %>
+    <%= f.fields_for :tickets do |ticket_form| %>
+      <%= ticket_form.fields_for :passenger do |passenger_form| %>
+        <%= passenger_form.label :name %>
+        <%= passenger_form.text_field :name %>
+        <%= passenger_form.label :email %>
+        <%= passenger_form.text_field :email %>
+      <% end %>
+    <% end %>
+    <%= f.submit "Book Flight" %>
+  <% end %>
 <% end %>
