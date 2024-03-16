@@ -1,4 +1,6 @@
-<%= form_with model: @flight, url: flights_path, method: :get do |f| %>
+<%= form_with model: @flight, url: flights_path, method: :get, authenticity_token: true do |f| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
   <h3>Search your flight now</h3>
   <div>
     <%= f.label :departure_airport_id %>
