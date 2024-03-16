@@ -18,14 +18,18 @@ class BookingsController < ApplicationController
     @flight = Flight.find(params[:booking][:flight_id])
     @booking = current_user.bookings.build(booking_params)
     if @booking.save
-      redirect_to root_path
+      redirect_to booking_path(@booking)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @bookings = current_user.bookings
+    
+    @booking = Booking.find(params[:id])
+    if @booking.user != current_user
+      redirect_to root_path
+    end
   end
 
   private

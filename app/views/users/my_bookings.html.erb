@@ -1,0 +1,13 @@
+<h3>All of your bookings </h3>
+
+<% @bookings.each do |booking| %>
+  <div><%= link_to "Booking:", booking %></div>
+  <div> Flight detail: <%= booking.flight.flight_detail %></div> 
+  <% booking.passengers.each do |passenger| %>
+    <div> Ticket infor: </div>
+    <div> Name: <%= passenger.name %></div>    
+    <div> Email: <%= passenger.email %></div>  
+    <br>  
+  <% end %>
+  <hr>
+<% end %>
