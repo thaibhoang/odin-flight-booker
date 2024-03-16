@@ -24,6 +24,10 @@ class BookingsController < ApplicationController
     end
   end
 
+  def show
+    @bookings = current_user.bookings
+  end
+
   private
 
   def after_search_booking_params
