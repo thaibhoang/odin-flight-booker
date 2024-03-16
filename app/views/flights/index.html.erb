@@ -4,14 +4,10 @@
   <h3>Search Result </h3>
   <%= form_with model: @booking, url: new_booking_path, method: :get do |b| %>
     <%= hidden_field_tag "number_of_passengers", @number_of_seats %>
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <% @flight_search_results.each do |flight| %>
-      <div>
-        <%= b.radio_button(:flight_id, flight.id) %>
-        <%= b.label(:flight_id, flight.flight_detail) %>
-      </div>
-    <% end %>    
-    <%= b.submit "Book Flight" %>
+    <%= b.collection_radio_buttons :flight_id, @flight_search_results, :id, :flight_detail do |bf|%>
+      <%= bf.radio_button + bf.label %><br>
+    <% end %>  
+    <%= submit_tag "Book Flight" %>
   <% end %>
 <% else %>
   <% if @flight_search_results && @flight_search_results.size == 0 %>
