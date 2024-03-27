@@ -4,14 +4,41 @@
   <%= form_with model: @booking, format: :html do |f| %>
     <div>Passengers Details:</div>
     <%= f.hidden_field :flight_id %>
-    <%= f.fields_for :tickets do |ticket_form| %>
-      <%= ticket_form.fields_for :passenger do |passenger_form| %>
-        <%= passenger_form.label :name %>
-        <%= passenger_form.text_field :name %>
-        <%= passenger_form.label :email %>
-        <%= passenger_form.text_field :email %>
-      <% end %>
-    <% end %>
+    <div data-controller="manage-passenger" data-manage-passenger-passenger-number-value="<%= @num_passengers %>" data-manage-passenger-id-value="<%= @num_passengers %>">
+      <%= f.fields_for :tickets do |ticket_form| %>
+        <div class="passenger-fields">
+          <%= ticket_form.fields_for :passenger do |passenger_form| %>
+            <br>
+            <div>
+              <%= passenger_form.label :name %>
+              <%= passenger_form.text_field :name %>
+            </div>
+            <div>
+              <%= passenger_form.label :email %>
+              <%= passenger_form.text_field :email %>
+            </div>
+          <% end %>
+          <button type="button" data-action="click->manage-passenger#remove">Remove</button>        
+        </div>
+      <% end %>    
+      <template>
+        <div class="passenger-fields">
+          <br>
+          <div>
+            <label for="booking_tickets_attributes_2_passenger_attributes_name">Name</label>
+            <input type="text" name="booking[tickets_attributes][2][passenger_attributes][name]" id="booking_tickets_attributes_2_passenger_attributes_name">
+          </div>
+          <div>
+            <label for="booking_tickets_attributes_2_passenger_attributes_email">Email</label>
+            <input type="text" name="booking[tickets_attributes][2][passenger_attributes][email]" id="booking_tickets_attributes_2_passenger_attributes_email">
+          </div>
+          <button type="button" data-action="click->manage-passenger#remove">Remove</button>
+        </div>
+      </template>
+
+      <button type="button" data-action="click->manage-passenger#add" data-manage-passenger-target="addButton">Add Passenger</button>
+    </div>
+    
     <%= f.submit "Book Flight" %>
   <% end %>
 <% end %>

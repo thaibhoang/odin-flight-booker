@@ -7,8 +7,8 @@ class BookingsController < ApplicationController
     else
       @booking = Booking.new(after_search_booking_params)
       @flight = Flight.find(params[:booking][:flight_id])
-      num_passengers = params[:number_of_passengers].to_i
-      num_passengers.times do
+      @num_passengers = params[:number_of_passengers].to_i
+      @num_passengers.times do
         @booking.tickets.build.build_passenger
       end
     end
