@@ -11,9 +11,10 @@ export default class extends Controller {
       input.id = input.id.replace("2", `${this.idValue}`)
       input.name = input.name.replace("2", `${this.idValue}`)
       console.log(input.id, input.name)
-    })    
-    let label = clone.querySelector('label')
-    label.htmlFor = label.htmlFor.replace("2", `${this.idValue}`)
+    })  
+    clone.querySelectorAll('label').forEach(label => {
+      label.htmlFor = label.htmlFor.replace("2", `${this.idValue}`)
+    })
     this.element.insertBefore(clone, this.addButtonTarget)
     this.updatePassengerNumber()
     this.idValue++
